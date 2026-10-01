@@ -2,7 +2,7 @@
 
 ## 🚀 Live Demo
 
-👉 [Open Resource Compass]([https://your-project-name.streamlit.app](https://chaitanyaraj28-resource-compass-app-kd8l3v.streamlit.app/)
+👉 [Open Resource Compass]([https://resource_compass.streamlit.app](https://chaitanyaraj28-resource-compass-app-kd8l3v.streamlit.app/))
 
 Resource Compass is a simple, student-focused library resource
 recommendation system.
