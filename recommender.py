@@ -79,35 +79,52 @@ def recommend_resources(topic, level, goal):
     """
     Main recommendation function.
 
-    Args:
-        topic (str): User's topic of interest
-        level (str): User's knowledge level (Beginner/Intermediate/Advanced)
-        goal (str): User's learning goal
-
-    Returns:
-        list: Top 3-5 recommended resources with match scores
+    Returns up to 5 unique resources matching the topic,
+    ranked by topic, level, and goal.
     """
-    # Normalize the topic
+
     normalized_topic = normalize_topic(topic)
 
-    # Get all resources from database
     all_resources = get_all_resources()
 
-    # Calculate scores for each resource
     scored_resources = []
 
     for resource in all_resources:
-        score = calculate_match_score(resource, normalized_topic, level, goal)
 
-        # Only include resources with at least a topic match (score >= 50)
-        if score >= 50:
+        score = calculate_match_score(
+            resource,
+            normalized_topic,
+            level,
+            goal
+        )
+
+        # Only include resources with a topic match
+        if resource["topic"].lower() == normalized_topic.lower():
+
             resource_with_score = resource.copy()
+
             resource_with_score["match_score"] = score
             resource_with_score["explanation"] = generate_explanation(score)
+
             scored_resources.append(resource_with_score)
 
-    # Sort by score (highest first)
-    scored_resources.sort(key=lambda x: x["match_score"], reverse=True)
+    # Sort highest score first
+    scored_resources.sort(
+        key=lambda x: x["match_score"],
+        reverse=True
+    )
 
-    # Return top 5 recommendations
-    return scored_resources[:5]
+    # Remove duplicate titles
+    unique_resources = []
+    seen_titles = set()
+
+    for resource in scored_resources:
+
+        title = resource["title"]
+
+        if title not in seen_titles:
+            seen_titles.add(title)
+            unique_resources.append(resource)
+
+    # Return maximum 5 unique resources
+    return unique_resources[:5]
