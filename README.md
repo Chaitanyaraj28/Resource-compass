@@ -1,31 +1,64 @@
 📚 Resource Compass
 
-## 🚀 Live Demo
+🚀 Live Demo
 
 👉 [Open Resource Compass](https://chaitanyaraj28-resource-compass-app-kd8l3v.streamlit.app/)
 
-Resource Compass is a simple, student-focused library resource
-recommendation system.
+Resource Compass is a student-focused library resource recommendation system
+that helps students find suitable learning resources based on their:
 
-It helps students find a small list of useful learning resources based
-on:
-
-Topic
-
-Knowledge Level
-
-Learning Goal
+- Topic
+- Knowledge Level
+- Learning Goal
 
 Instead of showing a large list of resources, the system aims to provide
 a short and understandable set of recommendations.
 
-🎯 Project Goal
 
-Students often have access to many books and learning resources but are
-unsure which one is suitable for their current level and purpose.
+🎯 Problem
 
-Resource Compass addresses this problem by taking a student's input and
-using rule-based recommendation logic to suggest relevant resources.
+Students often have access to many books and learning resources but may not
+know which resource is most suitable for their current level and purpose.
+
+Resource Compass reduces this choice overload by ranking relevant resources
+using a transparent rule-based scoring system.
+
+
+⚙️ How It Works
+
+Student Input
+       ↓
+Streamlit Interface
+       ↓
+Python Recommendation Engine
+       ↓
+SQLite Resource Database
+       ↓
+Weighted Match Scoring
+       ↓
+Top 3–5 Recommended Resources
+       ↓
+Results + Explanation
+
+The current recommendation logic uses transparent rules to match a
+resource with the student's selected topic, level, and goal.
+
+
+🧠 Recommendation Logic
+
+Each resource receives a score out of 100:
+
+| Criterion | Weight |
+|---|---|
+| Topic Match | 50 |
+| Knowledge Level Match | 25 |
+| Learning Goal Match | 25 |
+| **Total** | **100** |
+
+The resources are ranked according to their match score.
+
+The system also generates a simple explanation for every recommendation.
+
 
 🛠️ Tech Stack
 
@@ -37,18 +70,19 @@ SQLite / Database layer --- resource storage
 
 Git & GitHub --- version control and team collaboration
 
+
 📁 Project Structure
 
-resource-compass/
-│
+Resource-compass/
 ├── app.py
 ├── recommender.py
 ├── database.py
+├── resource_compass.db
 ├── requirements.txt
 ├── README.md
 └── .gitignore
 
-app.py
+app.py—
 
 Contains the Streamlit user interface.
 
@@ -56,7 +90,7 @@ It collects: - Topic - Knowledge level - Learning goal
 
 and displays the recommended resources.
 
-recommender.py
+recommender.py—
 
 Contains the rule-based recommendation logic.
 
@@ -66,20 +100,45 @@ recommend_resources(topic, level, goal)
 
 It takes the student's preferences and returns matching resources.
 
-database.py
+database.py—
 
 Contains the database-related functionality for storing and retrieving
 resource data.
 
-requirements.txt
+requirements.txt—
 
 Contains the Python packages required to run the project.
+
+
+🔄 End-to-End System Flow
+The complete application works as follows:
+
+1.The student enters a topic.
+
+2.The student selects their knowledge level.
+
+3.The student selects their learning goal.
+
+4.Streamlit passes these inputs to the recommendation engine.
+
+5.The recommendation engine retrieves resources from the SQLite database.
+
+6.Each resource is evaluated using the rule-based scoring logic.
+
+7.Resources are ranked according to their scores.
+
+8.The best matching resources are returned.
+
+9.Streamlit displays the recommendations along with their scores and explanations.
+
+No manual lookup is required between the user's input and the final result.
+
 
 🚀 How to Run Locally
 
 1. Clone the repository
 
-git clone <your-github-repository-url>
+git clone https://chaitanyaraj28-resource-compass
 
 2. Open the project folder
 
@@ -93,7 +152,7 @@ python -m venv env
 
 4. Activate the virtual environment
 
-.\env\Scriptsctivate
+.\env\Scripts\activate
 
 5. Install dependencies
 
@@ -105,37 +164,34 @@ streamlit run app.py
 
 The application will open in your browser.
 
-🧪 Testing the Recommendation Logic
 
-The recommendation function can also be tested directly from the
-terminal.
+🧪Testing
+The recommendation system can be tested using different combinations of topic, knowledge level, and learning goal.
 
-Example:
+Example Test Case 1
 
-python -c "import recommender; print(recommender.recommend_resources('Data Structures', 'Beginner', 'Understand Concepts'))"
+Topic: Python
+Level: Beginner
+Goal: Practice
 
-Another example:
+Expected result:
+* Relevant Python resources
+* Ranked recommendations
+* Match scores
+* Recommendation explanations
 
-python -c "import recommender; print(recommender.recommend_resources('Python', 'Beginner', 'Practice'))"
+Example Test Case 2
 
-🔄 How the System Works
+Topic: Data Structures
+Level: Beginner
+Goal: Understand Concepts
 
-Student
-   ↓
-Enter Topic + Level + Goal
-   ↓
-Streamlit Interface
-   ↓
-Recommendation Logic
-   ↓
-Resource Matching
-   ↓
-Recommended Resources
-   ↓
-Display Results
+Expected result:
+* Relevant Data Structures resources
+* Ranked recommendations
+* Match scores
+* Recommendation explanations
 
-The current recommendation logic uses transparent rules to match a
-resource with the student's selected topic, level, and goal.
 
 👥 Team Workflow
 
@@ -157,34 +213,6 @@ GitHub
 
 Before pushing changes, test the application locally.
 
-⚠️ Current Limitations
-
-The current prototype uses a small curated set of resources for testing.
-
-The recommendation system currently uses exact matching for:
-
-Topic
-
-Knowledge level
-
-Learning goal
-
-Therefore, an input combination that does not exactly match an available
-resource may return no recommendations.
-
-Future versions can improve this by introducing:
-
-Match scoring
-
-Partial topic matching
-
-Top 3--5 recommendations
-
-Recommendation explanations
-
-Larger resource catalogue
-
-Better database integration
 
 🔮 Future Improvements
 
@@ -193,8 +221,6 @@ Possible future improvements include:
 Expand the library resource catalogue.
 
 Store resources in a structured database.
-
-Add recommendation scores.
 
 Display why each resource was recommended.
 
@@ -206,13 +232,17 @@ Add more learning levels and goals.
 
 Conduct usability testing with real students.
 
+
 📌 Project Status
 
 Prototype / Development Stage
-
 The project is being developed as a student Design Thinking and Idea Lab
 prototype.
 
 📄 License
 
 This project is intended for educational and academic use.
+
+
+
+
