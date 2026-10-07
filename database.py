@@ -112,21 +112,27 @@ def seed_resources():
      "Operating Systems", "Advanced", "Understand Concepts",
      "Comprehensive guide to operating system principles and design.", "Book"),
 
+        # AI books
+        ("Artificial Intelligence: A Modern Approach", "Stuart Russell and Peter Norvig", "Artificial Intelligence", "Advanced", "Revision",
+         "The leading textbook in artificial intelligence covering theory and practice.", "Book"),
+<<<<<<<<< Temporary merge branch 1
+    ]
 
-    # ==================== ARTIFICIAL INTELLIGENCE ====================
+    # Insert all books
+    cursor.executemany("""
+        INSERT INTO resources (title, author, topic, level, goal, description, resource_type)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, books)
 
-    ("Artificial Intelligence: A Modern Approach",
-     "Stuart Russell and Peter Norvig",
-     "Artificial Intelligence", "Advanced", "Revision",
-     "The leading textbook in artificial intelligence covering theory and practice.", "Book"),
+    conn.commit()
+    conn.close()
+    print(f"Successfully seeded {len(books)} resources into the database.")
+=========
 
-
-    # ==================== CLOUD COMPUTING ====================
-
-    ("AWS Certified Solutions Architect Official Study Guide",
-     "Joe Baron et al.",
-     "Cloud Computing", "Intermediate", "Revision",
-     "Comprehensive guide for AWS architecture concepts and certification preparation.", "Book"),
+        # --- NEW ADDITIONS ---
+        # Cloud Computing books
+        ("AWS Certified Solutions Architect Official Study Guide", "Joe Baron et al.", "Cloud Computing", "Intermediate", "Revision",
+         "Comprehensive guide for AWS architecture concepts and certification preparation.", "Book"),
 
 
     # ==================== WEB DEVELOPMENT ====================
