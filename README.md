@@ -24,24 +24,26 @@ Resource Compass reduces this choice overload by ranking relevant resources
 using a transparent rule-based scoring system.
 
 
-⚙️ How It Works
+## ⚙️ How It Works
 
+```text
 Student Input
-       ↓
+     ↓
 Streamlit Interface
-       ↓
+     ↓
 Python Recommendation Engine
-       ↓
+     ↓
 SQLite Resource Database
-       ↓
+     ↓
 Weighted Match Scoring
-       ↓
+     ↓
 Top 3–5 Recommended Resources
-       ↓
+     ↓
 Results + Explanation
+```
 
-The current recommendation logic uses transparent rules to match a
-resource with the student's selected topic, level, and goal.
+The recommendation logic uses transparent rules to match resources with the
+student's selected topic, knowledge level, and learning goal.
 
 
 🧠 Recommendation Logic
@@ -73,6 +75,7 @@ Git & GitHub --- version control and team collaboration
 
 📁 Project Structure
 
+```text
 Resource-compass/
 ├── app.py
 ├── recommender.py
@@ -81,7 +84,7 @@ Resource-compass/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
-
+```
 app.py—
 
 Contains the Streamlit user interface.
@@ -199,6 +202,7 @@ The project is developed collaboratively using GitHub.
 
 Recommended workflow:
 
+```text
 Make changes
      ↓
 Test locally
@@ -210,7 +214,7 @@ git commit
 git push
      ↓
 GitHub
-
+```
 Before pushing changes, test the application locally.
 
 
